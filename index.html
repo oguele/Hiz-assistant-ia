@@ -1,17 +1,146 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HIZ ASSISTANT IA</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HIZ ASSISTANT IA</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #101827;
+      color: white;
+    }
+
+    header {
+      background: #19263c;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid #34445e;
+    }
+
+    header h2 {
+      margin: 0;
+      color: #65b8ff;
+    }
+
+    header p {
+      color: #b8c6d9;
+      font-size: 13px;
+    }
+
+    #messages {
+      padding: 20px;
+      height: 65vh;
+      overflow-y: auto;
+    }
+
+    .message {
+      padding: 13px;
+      margin-bottom: 14px;
+      border-radius: 12px;
+      max-width: 90%;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .bot {
+      background: #253650;
+      margin-right: auto;
+    }
+
+    .user {
+      background: #1269bd;
+      margin-left: auto;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 8px;
+      padding: 15px;
+      background: #19263c;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    input {
+      flex: 1;
+      min-width: 0;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+    button {
+      background: #1685e5;
+      color: white;
+      border: none;
+      padding: 12px 17px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+  </style>
 </head>
+
 <body>
 
-    <h1>Bienvenue sur HIZ ASSISTANT IA</h1>
+  <header>
+    <h2>🤖 HIZ ASSISTANT IA</h2>
+    <p>Ton assistant intelligent en français</p>
+  </header>
 
-    <p>Mon premier projet d'intelligence artificielle.</p>
+  <div id="messages" aria-live="polite">
+    <div class="message bot">
+      Bonjour ! 👋 Je suis HIZ ASSISTANT IA.
+      Comment puis-je t'aider aujourd'hui ?
+    </div>
+  </div>
 
-    <button>Commencer</button>
+  <div class="input-area">
+    <input
+      id="question"
+      type="text"
+      placeholder="Écris ton message..."
+    >
+    <button onclick="envoyer()">Envoyer</button>
+  </div>
+
+  <script>
+    function envoyer() {
+      const input = document.getElementById("question");
+      const messages = document.getElementById("messages");
+      const texte = input.value.trim();
+
+      if (texte === "") return;
+
+      const question = document.createElement("div");
+      question.className = "message user";
+      question.textContent = texte;
+      messages.appendChild(question);
+
+      input.value = "";
+
+      const reponse = document.createElement("div");
+      reponse.className = "message bot";
+
+      reponse.textContent =
+        "Merci pour ta question ! 😊 Je suis actuellement en version de démonstration. Ma connexion à une véritable intelligence artificielle sera ajoutée dans la prochaine étape.";
+
+      messages.appendChild(reponse);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    document.getElementById("question")
+      .addEventListener("keydown", function(event) {
+        if (event.key === "Enter") envoyer();
+      });
+  </script>
 
 </body>
 </html>
